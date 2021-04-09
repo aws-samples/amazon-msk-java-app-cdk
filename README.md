@@ -27,13 +27,13 @@ Application containerised and deployed to AWS Fargate consumes messages from Kaf
 Both lambda function and consumer application publish logs to Amazon CloudWatch.  
 
 ## Project structure
-* `amazon-msk-java-app-cdk/lib` - directory containing all [AWS CDK stacks](https://docs.aws.amazon.com/cdk/latest/guide/stacks.html)
-* `amazon-msk-java-app-cdk/bin` - directory containing [AWS CDK app definition](https://docs.aws.amazon.com/cdk/latest/guide/apps.html)
-* `amazon-msk-java-app-cdk/lambda` - directory containing code of `TransactionHandler` AWS Lambda function
-* `consumer` - directory containing code of Kafka consumer Spring Boot Java application
+* [`amazon-msk-java-app-cdk/lib`](amazon-msk-java-app-cdk/lib) - directory containing all [AWS CDK stacks](https://docs.aws.amazon.com/cdk/latest/guide/stacks.html)
+* [`amazon-msk-java-app-cdk/bin`](amazon-msk-java-app-cdk/bin) - directory containing [AWS CDK app definition](https://docs.aws.amazon.com/cdk/latest/guide/apps.html)
+* [`amazon-msk-java-app-cdk/lambda`](amazon-msk-java-app-cdk/lambda) - directory containing code of `TransactionHandler` AWS Lambda function
+* [`consumer`](consumer) - directory containing code of Kafka consumer Spring Boot Java application
 * [`consumer/docker/Dockerfile`](consumer/docker/Dockerfile) - definition of Docker image used for AWS Fargate container deployment
-* `doc` - directory containing architecture diagrams
-* `scripts` - directory containing deployment scripts
+* [`doc`](doc) - directory containing architecture diagrams
+* [`scripts`](scripts) - directory containing deployment scripts
 
 ## Prerequisites
 * An active AWS account
