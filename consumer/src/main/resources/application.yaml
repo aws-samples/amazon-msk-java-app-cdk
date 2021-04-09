@@ -1,0 +1,8 @@
+consumer:
+  group-id: ${GROUP_ID}
+  table-name: ${TABLE_NAME}
+  topic: ${TOPIC_NAME}
+  bootstrap-address: ${BOOTSTRAP_ADDRESS}
+  trust-store-location: ${TRUST_STORE_LOCATION}
+  aws-profile: ${AWS_PROFILE:}
+  region: ${REGION}

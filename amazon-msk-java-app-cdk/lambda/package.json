@@ -1,0 +1,8 @@
+{
+  "name": "transaction-handler",
+  "version": "1.0.0",
+  "dependencies": {
+    "dayjs": "1.10.4",
+    "kafkajs": "1.15.0"
+  }
+}

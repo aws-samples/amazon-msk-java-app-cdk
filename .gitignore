@@ -1,0 +1,15 @@
+*.js
+!jest.config.js
+*.d.ts
+node_modules
+*.iml
+**.jar
+.idea
+consumer/target
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+/consumer/dependency-reduced-pom.xml
+/lambda/package-lock.json
+/amazon-msk-java-app-cdk/package-lock.json
+/amazon-msk-java-app-cdk/lambda/package-lock.json
