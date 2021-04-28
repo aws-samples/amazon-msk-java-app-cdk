@@ -22,7 +22,6 @@ export class VpcStack extends cdk.Stack {
     public vpc: ec2.Vpc;
     public kafkaSecurityGroup: ec2.SecurityGroup;
     public fargateSercurityGroup: ec2.SecurityGroup;
-    public bastionHostSecurityGroup: ec2.SecurityGroup;
     public lambdaSecurityGroup: ec2.SecurityGroup;
 
     constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
@@ -42,28 +41,14 @@ export class VpcStack extends cdk.Stack {
             allowAllOutbound: true
         });
 
-        this.bastionHostSecurityGroup = new ec2.SecurityGroup(this, 'bastionHostSecurityGroup', {
-            securityGroupName: 'bastionHostSecurityGroup',
-            vpc: this.vpc,
-            allowAllOutbound: true
-        });
-
         this.lambdaSecurityGroup = new ec2.SecurityGroup(this, 'lambdaSecurityGroup', {
             securityGroupName: 'lambdaSecurityGroup',
             vpc: this.vpc,
             allowAllOutbound: true
         });
 
-        this.kafkaSecurityGroup.connections.allowFrom(this.bastionHostSecurityGroup, ec2.Port.allTraffic(), "allowFromBastionToKafka");
         this.kafkaSecurityGroup.connections.allowFrom(this.lambdaSecurityGroup, ec2.Port.allTraffic(), "allowFromLambdaToKafka");
-        // this.kafkaSecurityGroup.connections.allowTo(this.bastionHostSecurityGroup, ec2.Port.allTraffic(), "allowToBastionFromBastion");
         this.kafkaSecurityGroup.connections.allowFrom(this.fargateSercurityGroup, ec2.Port.allTraffic(), "allowFromFargateToKafka");
-        // this.kafkaSecurityGroup.connections.allowTo(this.fargateSercurityGroup, ec2.Port.allTraffic(), "allowToFargateFromKafka");
-
-        // this.bastionHostSecurityGroup.connections.allowTo(this.fargateSercurityGroup, ec2.Port.allTraffic(), "allowToFargateFromBastion");
-
-        this.fargateSercurityGroup.connections.allowFrom(this.bastionHostSecurityGroup, ec2.Port.allTraffic(), "allowFromBastionToFargate");
         this.fargateSercurityGroup.connections.allowFrom(this.kafkaSecurityGroup, ec2.Port.allTraffic(), "allowFromKafkaToFargate");
-        // this.fargateSercurityGroup.connections.allowTo(this.kafkaSecurityGroup, ec2.Port.allTraffic(), "allowToKafkaFromFargate");
     }
 }

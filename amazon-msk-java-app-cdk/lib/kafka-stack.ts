@@ -33,9 +33,14 @@ export class KafkaStack extends cdk.Stack {
                     subnetType: ec2.SubnetType.PRIVATE
                 }).subnetIds],
                 instanceType: "kafka.t3.small",
+                storageInfo: {
+                    ebsStorageInfo: {
+                        volumeSize: 5
+                    }
+                }
             },
             clusterName: "TransactionsKafkaCluster",
-            kafkaVersion: "2.2.1",
+            kafkaVersion: "2.7.0",
             numberOfBrokerNodes: 2
         });
     }
