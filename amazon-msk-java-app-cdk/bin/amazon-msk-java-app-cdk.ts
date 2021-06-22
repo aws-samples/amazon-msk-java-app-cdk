@@ -23,6 +23,7 @@ import {VpcStack} from "../lib/vpc-stack";
 import {DynamoDbStack} from "../lib/dynamodb-stack";
 import {FargateStack} from "../lib/fargate-stack";
 import {LambdaStack} from "../lib/lambda-stack";
+import {KafkaTopicStack} from "../lib/kafka-topic-stack";
 
 const app = new cdk.App();
 
@@ -32,6 +33,10 @@ let dynamoDbStack = new DynamoDbStack(app, 'DynamoDbStack');
 
 let kafkaStack = new KafkaStack(vpcStack, app, 'KafkaStack');
 kafkaStack.addDependency(vpcStack);
+
+let kafkaTopicStack = new KafkaTopicStack(vpcStack, kafkaStack, app, 'KafkaTopicStack');
+kafkaTopicStack.addDependency(vpcStack);
+kafkaTopicStack.addDependency(kafkaStack);
 
 let lambdaStack = new LambdaStack(vpcStack, kafkaStack, app, 'LambdaStack');
 lambdaStack.addDependency(vpcStack);
