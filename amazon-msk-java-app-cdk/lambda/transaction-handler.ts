@@ -27,8 +27,6 @@ const kafka = new Kafka({
     ssl: true
 });
 const producer = kafka.producer();
-const admin = kafka.admin();
-let topicCreated = false;
 
 interface TransactionEvent {
     accountId: number
@@ -41,23 +39,6 @@ interface TransactionResult {
 
 //More on kafkajs client: https://kafka.js.org/
 export const handler = async (event: TransactionEvent, context: any = {}): Promise<TransactionResult> => {
-    if (!topicCreated) {
-        //TODO: this ideally should be done once somewhere outside of lambda for example in the bastion host or during deploy
-        console.log("Connecting to kafka admin...");
-        await admin.connect();
-        console.log(`Creating topic: ${TOPIC}...`);
-        await admin.createTopics({
-            topics: [{
-                topic: TOPIC,
-                numPartitions: 1,
-                replicationFactor: 2
-            }]
-        });
-        topicCreated = true;
-        await admin.disconnect()
-        console.log(`Created topic: ${TOPIC}`);
-    }
-
     console.log("Connecting to kafka producer...");
     await producer.connect();
     console.log(`Sending message ${JSON.stringify(event)} to kafka ...`);

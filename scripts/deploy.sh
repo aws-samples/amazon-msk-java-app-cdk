@@ -13,6 +13,9 @@ kafka_arn=$(aws kafka list-clusters --output text --query 'ClusterInfoList[*].Cl
 kafka_brokers=$(aws kafka get-bootstrap-brokers --cluster-arn $kafka_arn --output text --query '*') && echo "$kafka_brokers"
 topicName=transactions
 
+echo "Deploying KafkaTopicStack"
+cdk deploy KafkaTopicStack --parameters KafkaTopicStack:bootstrapAddress="$kafka_brokers" --parameters KafkaTopicStack:topicName="$topicName" --require-approval never
+
 echo "Deploying LambdaStack..."
 cdk deploy LambdaStack --parameters LambdaStack:bootstrapAddress="$kafka_brokers" --parameters LambdaStack:topicName="$topicName" --require-approval never --verbose
 
