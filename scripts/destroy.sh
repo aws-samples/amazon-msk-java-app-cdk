@@ -6,11 +6,11 @@ cd ../amazon-msk-java-app-cdk || exit
 echo "Destroying FargateStack..."
 cdk destroy FargateStack --force --verbose
 
-echo "Destroying KafkaTopicStack"
-cdk destroy KafkaTopicStack --force --verbose
-
 echo "Destroying KafkaStack..."
 cdk destroy KafkaStack --force --verbose
+
+echo "Destroying KafkaTopicStack"
+cdk destroy KafkaTopicStack --force --verbose
 
 echo "Destroying DynamoDbStack..."
 cdk destroy DynamoDbStack --force --verbose
