@@ -29,7 +29,7 @@ Both lambda function and consumer application publish logs to Amazon CloudWatch.
 ## Project structure
 * [`amazon-msk-java-app-cdk/lib`](amazon-msk-java-app-cdk/lib) - directory containing all [AWS CDK stacks](https://docs.aws.amazon.com/cdk/latest/guide/stacks.html)
 * [`amazon-msk-java-app-cdk/bin`](amazon-msk-java-app-cdk/bin) - directory containing [AWS CDK app definition](https://docs.aws.amazon.com/cdk/latest/guide/apps.html)
-* [`amazon-msk-java-app-cdk/lambda`](amazon-msk-java-app-cdk/lambda) - directory containing code of `TransactionHandler` AWS Lambda function
+* [`amazon-msk-java-app-cdk/lambda`](amazon-msk-java-app-cdk/lambda) - directory containing code of `TransactionHandler` AWS Lambda function as well as code of Custom Resource handler responsible for creating Kafka topic during deployment
 * [`consumer`](consumer) - directory containing code of Kafka consumer Spring Boot Java application
 * [`consumer/docker/Dockerfile`](consumer/docker/Dockerfile) - definition of Docker image used for AWS Fargate container deployment
 * [`doc`](doc) - directory containing architecture diagrams
@@ -67,5 +67,5 @@ Both lambda function and consumer application publish logs to Amazon CloudWatch.
 8. You can also view CloudWatch logs in AWS console or by running [`aws logs tail` command](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/logs/tail.html) with specified CloudWatch Logs group  
 
 ## Clean up
-Follow [AWS CDK instructions](https://docs.aws.amazon.com/cdk/latest/guide/hello_world.html#hello_world_tutorial_destroy) to remove AWS CDK stacks from your account.
-Be sure to also [remove Amazon DynamoDB table](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeleteTable), [clean up Amazon CloudWatch logs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/logs/delete-log-group.html) and [remove Amazon ECR images](https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html) to avoid incurring additional AWS infrastructure costs.
+Follow [AWS CDK instructions](https://docs.aws.amazon.com/cdk/latest/guide/hello_world.html#hello_world_tutorial_destroy) to remove AWS CDK stacks from your account. You can also use [`scripts/destroy.sh`](scripts/destroy.sh).
+Be sure to also manually [remove Amazon DynamoDB table](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html#WorkingWithTables.Basics.DeleteTable), [clean up Amazon CloudWatch logs](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/logs/delete-log-group.html) and [remove Amazon ECR images](https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html) to avoid incurring additional AWS infrastructure costs.
