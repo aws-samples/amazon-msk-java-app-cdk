@@ -22,9 +22,9 @@ and the other way is using AWS CDK [`NodejsFunction`](https://docs.aws.amazon.co
 ## Architecture
 ![architecture](doc/architecture.png)
 
-Triggering AWS Lambda function publishes messages to Apache Kafka topic. 
-Application containerised and deployed to AWS Fargate consumes messages from Kafka topic, processes them and store results in Amazon DynamoDB table.
-Both lambda function and consumer application publish logs to Amazon CloudWatch.  
+Triggering the TransactionHandler Lambda function publishes messages to an Apache Kafka topic. 
+The application is packaged in a container and deployed to ECS Fargate, consumes messages from the Kafka topic, processes them, and stores the results in an Amazon DynamoDB table. 
+The KafkaTopicHandler Lambda function is called once during deployment to create Kafka topic. Both the Lambda function and the consumer application publish logs to Amazon CloudWatch.
 
 ## Project structure
 * [`amazon-msk-java-app-cdk/lib`](amazon-msk-java-app-cdk/lib) - directory containing all [AWS CDK stacks](https://docs.aws.amazon.com/cdk/latest/guide/stacks.html)
