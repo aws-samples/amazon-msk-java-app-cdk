@@ -15,8 +15,9 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as cdk from "@aws-cdk/core";
-import * as ec2 from "@aws-cdk/aws-ec2";
+import * as cdk from "aws-cdk-lib";
+import * as ec2 from "aws-cdk-lib/aws-ec2";
+import { Construct } from "constructs";
 
 export class VpcStack extends cdk.Stack {
     public vpc: ec2.Vpc;
@@ -24,7 +25,7 @@ export class VpcStack extends cdk.Stack {
     public fargateSercurityGroup: ec2.SecurityGroup;
     public lambdaSecurityGroup: ec2.SecurityGroup;
 
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         this.vpc = new ec2.Vpc(this, 'vpc');

@@ -15,19 +15,19 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as dynamodb from "@aws-cdk/aws-dynamodb";
-import {AttributeType} from "@aws-cdk/aws-dynamodb";
-import * as cdk from "@aws-cdk/core";
+import * as dynamodb from "aws-cdk-lib/aws-dynamodb";
+import * as cdk from 'aws-cdk-lib';
+import { Construct } from "constructs";
 
 export class DynamoDbStack extends cdk.Stack {
     private tableName = "Accounts";
 
-    constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         const table = new dynamodb.Table(this, "dynamoDbTable", {
             tableName: this.tableName,
-            partitionKey: {name: "id", type: AttributeType.STRING}
+            partitionKey: {name: "id", type: dynamodb.AttributeType.STRING}
         });
     }
 }

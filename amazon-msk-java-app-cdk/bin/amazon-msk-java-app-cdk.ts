@@ -17,7 +17,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
+import * as cdk from 'aws-cdk-lib';
 import {KafkaStack} from '../lib/kafka-stack';
 import {VpcStack} from "../lib/vpc-stack";
 import {DynamoDbStack} from "../lib/dynamodb-stack";

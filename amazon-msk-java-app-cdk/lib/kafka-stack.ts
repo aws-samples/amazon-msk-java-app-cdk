@@ -15,22 +15,23 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as cdk from '@aws-cdk/core';
-import * as msk from '@aws-cdk/aws-msk';
-import * as ec2 from '@aws-cdk/aws-ec2'
+import * as cdk from 'aws-cdk-lib';
+import * as msk from 'aws-cdk-lib/aws-msk';
+import * as ec2 from 'aws-cdk-lib/aws-ec2';
 
 import {VpcStack} from "./vpc-stack";
+import { Construct } from 'constructs';
 
 export class KafkaStack extends cdk.Stack {
     public kafkaCluster: msk.CfnCluster;
 
-    constructor(vpcStack: VpcStack, scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(vpcStack: VpcStack, scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
         this.kafkaCluster = new msk.CfnCluster(this, "kafkaCluster", {
             brokerNodeGroupInfo: {
                 securityGroups: [vpcStack.kafkaSecurityGroup.securityGroupId],
                 clientSubnets: [...vpcStack.vpc.selectSubnets({
-                    subnetType: ec2.SubnetType.PRIVATE
+                    subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS
                 }).subnetIds],
                 instanceType: "kafka.t3.small",
                 storageInfo: {
