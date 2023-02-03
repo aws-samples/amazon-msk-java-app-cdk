@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "target": "ES2018",
     "module": "commonjs",
     "lib": ["es2018"],
@@ -19,5 +20,5 @@
     "strictPropertyInitialization": false,
     "typeRoots": ["./node_modules/@types"]
   },
-  "exclude": ["cdk.out"]
+  "exclude": ["cdk.out", "node_modules", "dist"]
 }

@@ -15,16 +15,17 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as cdk from "@aws-cdk/core";
-import {CfnParameter, Duration} from "@aws-cdk/core";
+import * as cdk from "aws-cdk-lib";
+import {CfnParameter, Duration} from "aws-cdk-lib";
 import {VpcStack} from "./vpc-stack";
-import {NodejsFunction} from "@aws-cdk/aws-lambda-nodejs";
-import {Effect, PolicyStatement} from "@aws-cdk/aws-iam";
+import {NodejsFunction} from "aws-cdk-lib/aws-lambda-nodejs";
+import {Effect, PolicyStatement} from "aws-cdk-lib/aws-iam";
 import {KafkaStack} from "./kafka-stack";
-import {Runtime} from "@aws-cdk/aws-lambda"
+import {Runtime} from "aws-cdk-lib/aws-lambda"
+import { Construct } from "constructs";
 
 export class LambdaStack extends cdk.Stack {
-    constructor(vpcStack: VpcStack, kafkaStack: KafkaStack, scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(vpcStack: VpcStack, kafkaStack: KafkaStack, scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         let bootstrapAddress = new CfnParameter(this, "bootstrapAddress", {

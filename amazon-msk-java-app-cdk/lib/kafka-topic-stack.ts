@@ -15,19 +15,20 @@
  * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-import * as cdk from "@aws-cdk/core";
-import {CfnParameter, CustomResource, Duration} from "@aws-cdk/core";
+import * as cdk from 'aws-cdk-lib';
+import {CfnParameter, CustomResource, Duration} from "aws-cdk-lib";
 import {VpcStack} from "./vpc-stack";
 import {KafkaStack} from "./kafka-stack";
-import {NodejsFunction} from "@aws-cdk/aws-lambda-nodejs";
-import {Runtime} from "@aws-cdk/aws-lambda";
-import {Effect, PolicyStatement} from "@aws-cdk/aws-iam";
-import {Provider} from "@aws-cdk/custom-resources";
-import {RetentionDays} from "@aws-cdk/aws-logs";
+import {NodejsFunction} from "aws-cdk-lib/aws-lambda-nodejs";
+import {Runtime} from "aws-cdk-lib/aws-lambda";
+import {Effect, PolicyStatement} from "aws-cdk-lib/aws-iam";
+import {Provider} from "aws-cdk-lib/custom-resources";
+import {RetentionDays} from "aws-cdk-lib/aws-logs";
+import { Construct } from 'constructs';
 
 export class KafkaTopicStack extends cdk.Stack {
 
-    constructor(vpcStack: VpcStack, kafkaStack: KafkaStack, scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+    constructor(vpcStack: VpcStack, kafkaStack: KafkaStack, scope: Construct, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
 
         const bootstrapAddress = new CfnParameter(this, "bootstrapAddress", {
